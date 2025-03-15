@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Self Information Go App</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="" />
+  <meta name="theme-color" content="">
+
+  <style>
+  body {
+    background-color: #007d9c;
+    color: #ffffff;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+     'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+     'Droid Sans', 'Helvetica Neue', 'Segoe UI Emoji',
+     'Apple Color Emoji', 'Noto Color Emoji', sans-serif;
+  }
+  table {
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    margin-bottom: 50px;
+  }
+  .logo {
+    height: 30vh;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .info {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    max-width: 50%;
+  }
+  .info td {
+    padding: 10px;
+    border: 1px solid #ffffff;
+  }
+  .info tr:nth-child(even) {
+    background-color: #005f7b;
+  }
+  .info tr:nth-child(odd) {
+    background-color: #007d9c;
+  }
+  .info td:nth-child(1) {
+    font-weight: bold;
+  }
+  .info td:nth-child(2) {
+    text-align: right;
+  }
+  h2 {
+    margin-top: 2em;
+    margin-bottom: 1em;
+  }
+  </style>
+</head>
+
+<body class="info">
+  <h1 style="text-align:center">Go App - Self Information</h1>
+  <img class="logo" src="https://go.dev/images/gophers/ladder.svg"></img>
+  <p style="text-align:center">Environment Variable Text: {{.Text}}</p>
+
+  <h2>System Information</h2>
+
+  <h3>CPU Info</h3>
+  <table>
+    {{range $key, $value := .CpuInfo}}
+    {{ $c := fields $value }}
+    <tr style="background-color: #ffffff; color: #000000;">
+      <td>CPU #</td>
+      <td>{{$key}}</td>
+    </tr>
+    {{range $key, $value := $c}}
+    <tr>
+      <td>{{$key}}</td>
+      <td>{{$value}}</td>
+    </tr>
+    {{end}}
+    {{end}}
+  </table>
+
+  <h3>Memory Info</h3>
+  <table>
+    {{ $m := fields .VirtualMemory }}
+    {{range $key, $value := $m}}
+    <tr>
+      <td>{{$key}}</td>
+      <td>{{$value}}</td>
+    </tr>
+    {{end}}
+  </table>
+
+  <h3>Disk Info</h3>
+  <table>
+    {{range $key, $value := .DiskInfo}}
+    {{ $d := fields $value }}
+    <tr style="background-color: #ffffff; color: #000000;">
+      <td>Disk #</td>
+      <td>{{$key}}</td>
+    </tr>
+    {{range $key, $value := $d}}
+    <tr>
+      <td>{{$key}}</td>
+      <td>{{$value}}</td>
+    </tr>
+    {{end}}
+    {{end}}
+  </table>
+
+  <h3>Host Info</h3>
+  <table>
+    {{ $h := fields .HostInfo }}
+    {{range $key, $value := $h}}
+    <tr>
+      <td>{{$key}}</td>
+      <td>{{$value}}</td>
+    </tr>
+    {{end}}
+  </table>
+
+  <h3>Network Info</h3>
+  <table>
+    {{range $key, $value := .NetInfo}}
+    {{ $n := fields $value }}
+    <tr style="background-color: #ffffff; color: #000000;">
+      <td>NIC #</td>
+      <td>{{$key}}</td>
+    </tr>
+    {{range $key, $value := $n}}
+    <tr>
+      <td>{{$key}}</td>
+      <td>{{$value}}</td>
+    </tr>
+    {{end}}
+    {{end}}
+  </table>
+
+</body>
+
+</html>
