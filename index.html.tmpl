@@ -18,6 +18,18 @@
      'Droid Sans', 'Helvetica Neue', 'Segoe UI Emoji',
      'Apple Color Emoji', 'Noto Color Emoji', sans-serif;
   }
+  a {
+    color: #ffffff;
+  }
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  ul li {
+    display: inline;
+    margin-right: 10px;
+  }
   table {
     margin-left: auto;
     margin-right: auto;
@@ -59,6 +71,16 @@
     margin-top: 2em;
     margin-bottom: 1em;
   }
+  #top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border: 1px solid #ffffff;
+    padding: 5px;
+    background-color: #005f7b;
+    color: #ffffff;
+    text-decoration: none;
+  }
   </style>
 </head>
 
@@ -69,7 +91,17 @@
 
   <h2>System Information</h2>
 
-  <h3>CPU Info</h3>
+  <a id="top" href="#">Jump to top</a>
+
+  <ul>
+    <li><a href="#cpu">CPU Info</a></li>
+    <li><a href="#memory">Memory Info</a></li>
+    <li><a href="#disk">Disk Info</a></li>
+    <li><a href="#host">Host Info</a></li>
+    <li><a href="#network">Network Info</a></li>
+  </ul>
+
+  <h3 id="cpu">CPU Info</h3>
   <table>
     {{range $key, $value := .CpuInfo}}
     {{ $c := fields $value }}
@@ -86,7 +118,7 @@
     {{end}}
   </table>
 
-  <h3>Memory Info</h3>
+  <h3 id="memory">Memory Info</h3>
   <table>
     {{ $m := fields .VirtualMemory }}
     {{range $key, $value := $m}}
@@ -97,7 +129,7 @@
     {{end}}
   </table>
 
-  <h3>Disk Info</h3>
+  <h3 id="disk">Disk Info</h3>
   <table>
     {{range $key, $value := .DiskInfo}}
     {{ $d := fields $value }}
@@ -114,7 +146,7 @@
     {{end}}
   </table>
 
-  <h3>Host Info</h3>
+  <h3 id="host">Host Info</h3>
   <table>
     {{ $h := fields .HostInfo }}
     {{range $key, $value := $h}}
@@ -125,7 +157,7 @@
     {{end}}
   </table>
 
-  <h3>Network Info</h3>
+  <h3 id="network">Network Info</h3>
   <table>
     {{range $key, $value := .NetInfo}}
     {{ $n := fields $value }}

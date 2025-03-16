@@ -47,13 +47,13 @@ func main() {
 		"fields": fields,
 	})
 
-	cpuInfo, _ := cpu.Info()
-	diskInfo, _ := disk.Partitions(true)
-	hostInfo, _ := host.Info()
-	virtualMemory, _ := mem.VirtualMemory()
-	netInfo, _ := neti.IOCounters(true)
-
 	http.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
+
+		cpuInfo, _ := cpu.Info()
+		diskInfo, _ := disk.Partitions(true)
+		hostInfo, _ := host.Info()
+		virtualMemory, _ := mem.VirtualMemory()
+		netInfo, _ := neti.IOCounters(true)
 
 		ip, _, err := net.SplitHostPort(req.RemoteAddr)
 		if err != nil {
